@@ -1,4 +1,9 @@
 /* Sets all the text color to red! */
 body {
-    color: red;
+    color: tomato;
+}
+
+.my-plugin-ribbon-class{
+	background-color: green !important;
+	color: tomato !important;
 }
