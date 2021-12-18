@@ -1,4 +1,6 @@
 import { MyCommands } from './src/MyCommands';
+import { MyRibbon } from './src/MyRibbon';
+import { MyStatusBar } from './src/MyStatusBar';
 import { Plugin } from 'obsidian';
 import { MyPluginSettings, DEFAULT_SETTINGS, SampleSettingTab } from './src/SettingTab';
 
@@ -9,6 +11,8 @@ export default class MyPlugin extends Plugin {
 		await this.loadSettings();
 
 		MyCommands.add(this);
+		MyRibbon.add(this);
+		MyStatusBar.add(this);
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new SampleSettingTab(this.app, this));
