@@ -1,12 +1,16 @@
-import { Plugin} from 'obsidian';
+import { default as MyPlugin } from './../main';
 
-export module MyStatusBar {
-	export function add( plugin:Plugin ){
+export class MyStatusBar {
+	plugin: MyPlugin;
 
-		// This adds a status bar item to the bottom of the app. Does not work on mobile apps.
-		const statusBarItemEl = plugin.addStatusBarItem();
-		statusBarItemEl.setText('Olagatoo');
-
+	constructor(plugin: MyPlugin) {
+		this.plugin = plugin;
+		this.init();
 	}
 
+	init(): void {
+		// This adds a status bar item to the bottom of the app. Does not work on mobile apps.
+		const statusBarItemEl = this.plugin.addStatusBarItem();
+		statusBarItemEl.setText('Olagato4');
+	}
 }

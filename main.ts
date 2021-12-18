@@ -6,13 +6,16 @@ import { MyPluginSettings, DEFAULT_SETTINGS, SampleSettingTab } from './src/Sett
 
 export default class MyPlugin extends Plugin {
 	settings: MyPluginSettings;
+	myStatusBar: MyStatusBar;
+	myRibbon: MyRibbon;
+	myCommands: MyCommands;
 
 	async onload() {
 		await this.loadSettings();
 
-		MyCommands.add(this);
-		MyRibbon.add(this);
-		MyStatusBar.add(this);
+		this.myStatusBar = new MyStatusBar(this);
+		this.myRibbon = new MyRibbon(this);
+		this.myCommands = new MyCommands(this);
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new SampleSettingTab(this.app, this));

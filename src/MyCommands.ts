@@ -1,21 +1,27 @@
 
-import { Editor, MarkdownView, Plugin} from 'obsidian';
+import { Editor, MarkdownView} from 'obsidian';
 import { SampleModal } from './SampleModal';
+import { default as MyPlugin } from './../main';
 
+export class MyCommands {
+	plugin: MyPlugin;
 
-export module MyCommands {
-	export function add( plugin:Plugin ){
+	constructor(plugin: MyPlugin) {
+		this.plugin = plugin;
+		this.init();
+	}
 
+	init(): void {
 		// This adds a simple command that can be triggered anywhere
-		plugin.addCommand({
+		this.plugin.addCommand({
 			id: 'open-sample-modal-simple',
 			name: 'Olagato Open sample modal (simple)',
 			callback: () => {
-				new SampleModal(plugin.app).open();
+				new SampleModal(this.plugin.app).open();
 			}
 		});
 		// This adds an editor command that can perform some operation on the current editor instance
-		plugin.addCommand({
+		this.plugin.addCommand({
 			id: 'sample-editor-command',
 			name: 'Olagato LIPSUM',
 			editorCallback: (editor: Editor, view: MarkdownView) => {
@@ -24,17 +30,17 @@ export module MyCommands {
 			}
 		});
 		// This adds a complex command that can check whether the current state of the app allows execution of the command
-		plugin.addCommand({
+		this.plugin.addCommand({
 			id: 'open-sample-modal-complex',
 			name: 'Olagato Open sample modal (complex)',
 			checkCallback: (checking: boolean) => {
 				// Conditions to check
-				const markdownView = plugin.app.workspace.getActiveViewOfType(MarkdownView);
+				const markdownView = this.plugin.app.workspace.getActiveViewOfType(MarkdownView);
 				if (markdownView) {
 					// If checking is true, we're simply "checking" if the command can be run.
 					// If checking is false, then we want to actually perform the operation.
 					if (!checking) {
-						new SampleModal(plugin.app).open();
+						new SampleModal(this.plugin.app).open();
 					}
 
 					// This command will only show up in Command Palette when the check function returns true
@@ -43,5 +49,4 @@ export module MyCommands {
 			}
 		});
 	}
-
 }
