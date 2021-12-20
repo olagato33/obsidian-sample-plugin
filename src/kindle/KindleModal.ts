@@ -1,8 +1,13 @@
 import { App, Modal, Setting } from "obsidian";
+import { default as MyPlugin } from './../../main';
 
 export class KindleModal extends Modal {
-	constructor(app: App) {
+
+	plugin: MyPlugin;
+
+	constructor(app: App, plugin: MyPlugin) {
 		super(app);
+		this.plugin = plugin;
 	}
 
 	onOpen() {
@@ -22,6 +27,18 @@ export class KindleModal extends Modal {
 				// this.linkUrl = value;
 			})
 		);
+
+		new Setting(contentEl)
+			.setName('Setting #1')
+			.setDesc('It\'s a secret')
+			.addText(text => text
+				.setPlaceholder('Enter your secret')
+				.setValue(this.plugin.settings.mySetting)
+				.onChange(async (value) => {
+					console.log('Secret: ' + value);
+					this.plugin.settings.mySetting = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(contentEl).addButton((btn) => btn
 			.setButtonText("Cerrar")

@@ -16,7 +16,7 @@ export class MyCommands {
 			id: 'open-modal-Kindle',
 			name: 'Olagato Open Kindle',
 			callback: () => {
-				new KindleModal(this.plugin.app).open();
+				new KindleModal(this.plugin.app, this.plugin).open();
 			}
 		});
 	}
