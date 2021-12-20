@@ -1,5 +1,6 @@
 import { Notice} from 'obsidian';
 import { default as MyPlugin } from './../main';
+import { KindleModal } from './kindle/KindleModal';
 
 export class MyRibbon {
 	plugin: MyPlugin;
@@ -16,7 +17,8 @@ export class MyRibbon {
 		 */
 		 const ribbonIconEl = this.plugin.addRibbonIcon('dice', 'Olagato Plugin', (evt: MouseEvent) => {
 			// Called when the user clicks the icon.
-			new Notice('Olagato33\'s yeee!');
+			// new Notice('Olagato33\'s yeee!');
+			new KindleModal(this.plugin.app, this.plugin).open();
 		});
 		// Perform additional things with the ribbon
 		ribbonIconEl.addClass('my-plugin-ribbon-class');
